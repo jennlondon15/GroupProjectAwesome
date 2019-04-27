@@ -1,0 +1,117 @@
+.jumbotron {
+  position: relative;
+  height: 600px;
+  background: powderblue;
+  margin-top: 0 auto;
+
+  /* background-image: url("../images/dog.png"); */
+}
+
+.jumbotron-container {
+  position: absolute;
+  top: 15%;
+  border: 2px solid white;
+  left: 10%;
+  height: 400px;
+  width: 80%;
+}
+
+.jumbotron-container > * {
+  padding: 20px;
+}
+
+#image-dog {
+  z-index: 10;
+  width: 340px;
+  position: absolute;
+  right: -70px;
+  bottom: -30px;
+  margin: 60px;;
+  float: right;
+ 
+
+}
+
+h1 {
+  clear: both;
+  font-family: 'Rammetto One', cursive;
+  font-size: 80px;
+  color: white;
+  text-align: left;
+  
+}
+
+.lead {
+  font-family: 'Rammetto One', cursive;
+  color: white;
+  text-align: left;
+  font-size: 30px;
+  margin-top: 20px;
+  
+}
+
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.info h2 {
+  font-family: 'Roboto', sans-serif;
+}
+
+.info p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+.button {
+  background-color: ;
+  border: none;
+  color: ;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 30px;
+  width: 100%;
+  float: center;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 8px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  margin-top: 20px;
+}
+/* .button:hover {
+  background-color: black;
+  color: ;
+} */
+.button:active {
+  background-color: ;
+  box-shadow: 0 5px;
+  transform: translateY(4px);
+}
+input[type='text'],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+label {
+  font-family: 'Roboto', sans-serif;
+}
+main img {
+  height: 150px;
+  width: 150px;
+  padding-top: 50px;
+}

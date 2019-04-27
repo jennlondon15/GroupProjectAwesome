@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>PetMatch</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--BULMA-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/@petfinder/petfinder-js/dist/petfinder.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css" />
+  </head>
+
+  <body>
+      
+      <div class="jumbotron jumbotron-fluid">
+          <div class="jumbotron-container">
+            <h1 class="display-4">Want to have<br>a good friend?</br></h1>
+            <p class="lead">Saving one pet will not change the world,<br>but surely for that one pet,</br>the world will change forever</p>
+          </div>
+        
+             
+                <figure id="image-dog">
+                    <img src="./assets/images/dog.png" height="500px">
+                </figure>
+                
+                   
+      </div>
+                
+   
+    <section class="form"></section>
+    <label for="zip">Zip Code</label>
+    <input type="text" id="zip" name="zip">
+    </select>
+
+    <section class="form">
+      <label for="species">Species</label>
+      <select id="species" name="species">
+        <option value="0"></option>
+        <option value="Cat">Cat</option>
+        <option value="Dog">Dog</option>
+          
+      </select>
+
+      <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Modal title</p>
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <!-- Content ... -->
+            <div id="map"></div>
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-success">Save changes</button>
+            <button class="button">Cancel</button>
+          </footer>
+        </div>
+      </div>
+
+      <section class="form"></section>
+        <label for="age">Age</label>
+        <select id="age" name="age">
+          <option value="0"></option>
+          <option value="Baby">Baby</option>
+          <option value="Young">Young</option>
+          <option value="Adult">Adult</option>
+          <option value="Senior">Senior</option>  
+      </select>
+
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender">
+          <option value="0"></option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+      </select>
+      <input type="submit" id="Match" class="button" value="Find Match!"/>
+     </section>
+
+  <ul id='dog'></ul>
+  <div id="responseAnimal"></div>
+  
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHT_UHK6gwGk73hjnJWdWSaG3r6IfuQgg&callback=initMap"async defer></script>
+
+  </body>
+  <!-- javascript  -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script type="text/javascript" src="assets/javascript/javascript.js"></script>
+ 
+</html>
