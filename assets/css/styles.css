@@ -1,8 +1,10 @@
-..jumbotron {
+.jumbotron {
   position: relative;
   height: 600px;
   background: powderblue;
   margin-top: 0 auto;
+
+  /* background-image: url("../images/dog.png"); */
 }
 
 .jumbotron-container {
@@ -15,27 +17,27 @@
 }
 
 .jumbotron-container > * {
-  padding-top: 15px;
-  padding-left: 10px;
-  margin-left: 20px;
+  padding: 20px;
 }
 
 #image-dog {
   z-index: 10;
   width: 340px;
   position: absolute;
-  right: 40px;
+  right: -70px;
   bottom: -30px;
   margin: 60px;;
-  
+  float: right;
+ 
+
 }
 
 h1 {
+  clear: both;
   font-family: 'Rammetto One', cursive;
   font-size: 80px;
   color: white;
   text-align: left;
-  line-height: 1.2;
   
 }
 
@@ -43,15 +45,9 @@ h1 {
   font-family: 'Rammetto One', cursive;
   color: white;
   text-align: left;
-  font-size: 25px;
-  line-height: 1.5;
-  padding-top: 30px;
-   
-}
-
-.animal-pic {
-  width:200px;
-  border-radius: 50%;
+  font-size: 30px;
+  margin-top: 20px;
+  
 }
 
 
