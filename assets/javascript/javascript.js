@@ -62,14 +62,26 @@ $(function() {
               responsePhoto.attr("src", animalPhoto);
               responsePhoto.addClass("animal-pic");
               responsePhoto.attr("val", animalAddress);
+
           var animalDiv = $("<div class='col-md-3'>");
               animalDiv.append(responsePhoto);
               animalDiv.addClass("for-pets");
               animalDiv.append(animalName);
-              animalDiv.append(animalCity);
-              animalDiv.append(animalState);
-              animalDiv.append(animalAddress);
-              animalDiv.append(animalDiscription);        
+  
+          var modalPhoto = $("<img>");
+              modalPhoto.attr("src", animalPhoto);
+              modalPhoto.addClass("animal-pic");
+              modalPhoto.attr("val", animalAddress);
+
+          var modalDiv = $('<p>');
+              modalDiv.addClass("modal-pets");
+              modalDiv.append(modalPhoto);
+              modalDiv.append(animalAge);
+              modalDiv.append(animalName);
+              modalDiv.append(animalCity);
+              modalDiv.append(animalState);
+              modalDiv.append(animalAddress);
+              modalDiv.append(animalDiscription);       
 
           // var responseName = $("<p>");
           // responseName.text(animalName);
@@ -97,6 +109,7 @@ $(function() {
           
           mapMaker()
           $(".modal").show();
+          $('#modalAnimal').append(modalDiv);
         })
        $(".delete").on("click", function(){
          $(".modal").hide();
