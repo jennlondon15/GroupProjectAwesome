@@ -26,10 +26,8 @@
   position: absolute;
   right: -70px;
   bottom: -30px;
-  margin: 60px;;
+  margin: 60px;
   float: right;
- 
-
 }
 
 h1 {
@@ -38,7 +36,6 @@ h1 {
   font-size: 80px;
   color: white;
   text-align: left;
-  
 }
 
 .lead {
@@ -47,9 +44,7 @@ h1 {
   text-align: left;
   font-size: 30px;
   margin-top: 20px;
-  
 }
-
 
 main {
   display: flex;
