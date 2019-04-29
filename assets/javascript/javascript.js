@@ -1,136 +1,219 @@
-$(function() {
-  // check out google map API
-  let map;
-  function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 8,
-    });
+// ! wrap console log in if(debug) console.log("example")
+const debug = false;
+
+const animalArray = [];
+let options;
+
+// TODO - Handle Pagination routing - Max reply is often over 10k - We should be able to use the next and prev links to make some page buttons work https://www.w3schools.com/css/css3_pagination.asp
+const pf = new petfinder.Client({
+  apiKey: 'HXhiJjRfDuYpnR3qEGLZ3A2J3wdv7Aj8oLtqTqbBm31lZjsmiU',
+  secret: 'KboKKC3HHujidOq6ODiMScif9apSRrUGGXQtR14c',
+});
+
+// * Generates card from API response
+function createCard(animal) {
+  // Create img HTML element
+  const responsePhoto = `
+    <img
+      class="animal-pic"
+      src="${animal.photo}"
+      alt="${animal.name}
+      value="${animal.address}"
+    />
+  `;
+
+  // Create HTML tile with image and name
+  // TODO - Fix Tag CSS
+  const photoCard = `
+    <div class="column is-one-quarter-desktop is-half-tablet">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image">${responsePhoto}</figure>
+          <div class="card-content is-overlay is-clipped">
+            <span class="tag is-info">
+              ${animal.name}
+            </span>
+          </div>
+        </div>
+      <footer class="card-footer">
+        <a class="card-footer-item animal-pic"data-id="${animal.id}">
+          Get More Info
+        </a>
+      </footer>
+    </div>
+    </div>
+  `;
+
+  // Append tile with image and name to photo grid
+  $('#photo-grid').append(photoCard);
+}
+
+// * Generates iframe map with selected animals address
+function mapMaker(address) {
+  const mapKey = `AIzaSyAHT_UHK6gwGk73hjnJWdWSaG3r6IfuQgg`;
+  const query = `https://www.google.com/maps/embed/v1/place?key=${mapKey}&q=${address}`;
+
+  const map = `
+    <div class="map">
+      <iframe
+        src=${query}
+        allowfullscreen
+        frameborder='0'
+      />
+    </div>
+  `;
+
+  return map;
+}
+
+// * Generates modal HTML from selected animal
+function makeModal(selection) {
+  const animal = animalArray.filter(item => item.id === selection.id)[0];
+
+  // TODO - Handle 'null' conditions before populating cards (If address is null just set it to "Denver, CO")
+  const statRow = `
+  <div id="stats" class="tile is-ancestor">
+    <div class="tile is-parent">
+      <article class="tile is-child box">
+        <p>Age</p>
+        <p>${animal.age}</p>
+      </article>
+    </div>
+    <div class="tile is-parent">
+      <article class="tile is-child box">
+        <p>City/State</p>
+        <p>${animal.city}, ${animal.state}</p>
+      </article>
+    </div>
+    <div class="tile is-parent is-6">
+      <article class="tile is-child box">
+        <p>Address</p>
+        <p>${animal.address}</p>
+      </article>
+    </div>
+  </div>
+`;
+
+  const descriptionRow = `
+  <div id="desc" class="tile is-ancestor">
+    <div class="tile is-parent">
+      <article class="tile is-child box">
+        <p>Description</p>
+        <p>${animal.description}</p>
+      </article>
+    </div>
+  </div>
+`;
+
+  const modalContent = `${statRow}${descriptionRow}`;
+
+  const modalHeader = `
+  <header class="modal-card-head">
+    <p class="modal-card-title">${animal.name}</p>
+    <button class="delete" aria-label="close"></button>
+  </header>
+  `;
+
+  const modalBody = `
+  <section class="modal-card-body">
+    ${mapMaker(animal.address)}
+    ${modalContent}
+  </section>
+  `;
+
+  const modalFooter = `
+  <footer class="modal-card-foot">
+    <button class="button is-fullwidth is-link" aria-label="close">
+      Close
+    </button>
+  </footer>
+  `;
+
+  const modalCard = `
+    ${modalHeader}
+    ${modalBody}
+    ${modalFooter}
+  `;
+
+  $('.modal-card').append(modalCard);
+}
+
+// * Extracts and Transforms data from API response
+function onSuccess(response) {
+  if (debug) console.log('response:', response);
+  const { animals } = response.data;
+
+  for (let i = 0; i < animals.length; i += 1) {
+    // De-structure photos object from response
+    const { photos } = response.data.animals[i];
+
+    // Assign Animal info from data set
+    const animal = {
+      photo: '',
+      id: animals[i].id,
+      age: animals[i].age,
+      name: animals[i].name,
+      city: animals[i].contact.address.city,
+      state: animals[i].contact.address.state,
+      address: animals[i].contact.address.address1,
+      description: animals[i].description,
+    };
+
+    // Handle missing photo - assign blank dog and cat depending on user selection
+    if (options.type === 'Dog') {
+      animal.photo =
+        photos.length > 0
+          ? photos.map(item => item.large)[0].toString()
+          : './assets/images/blank-dog.png';
+    } else if (options.type === 'Cat') {
+      animal.photo =
+        photos.length > 0
+          ? photos.map(item => item.large)[0].toString()
+          : './assets/images/blank-cat.jpg';
+    }
+
+    // Store animals into local array for future data filtering/selecting
+    animalArray.push(animal);
+
+    // Make response card
+    createCard(animal);
   }
-  // GOogle API URL
-  const googleURL =
-    'https://www.google.com/maps/embed/v1/place?key=AIzaSyC9WPR0Lch_bWed56_TKHgqgRRIiAdBD2E&q=';
-  // connecting PetFinder API
-  const pf = new petfinder.Client({
-    apiKey: 'HXhiJjRfDuYpnR3qEGLZ3A2J3wdv7Aj8oLtqTqbBm31lZjsmiU',
-    secret: 'KboKKC3HHujidOq6ODiMScif9apSRrUGGXQtR14c',
-  });
+}
 
-  $('#Match').on('click', function() {
-    event.preventDefault();
+// * Calls petfinder API then passes data to onSuccess function
+function getData(query) {
+  pf.animal
+    .search(query)
+    .then(response => onSuccess(response))
+    .catch(err => console.log(err));
+}
 
-    const userZip = $('#zip')
-      .val()
-      .trim();
-    const userAge = $('#age')
-      .val()
-      .trim();
-    const userSpecies = $('#species')
-      .val()
-      .trim();
-    const userGender = $('#gender')
-      .val()
-      .trim();
+// Document functions - handles click and keyboard event triggers
 
-    console.log(`this is user Zip${userZip}`);
-    console.log(`this is Age ${userAge}`);
-    console.log(`this is Species ${userSpecies}`);
-    console.log(`this is Gender ${userGender}`);
+$(document).on('click', '.animal-pic', function() {
+  makeModal($(this).data());
+  $('.modal').show();
+});
 
-    // if (use the answers from the user) ...than show this
-    // if else (show this)
-    // else (plant)
+// TODO - Add in escape key event listener so you can press escape to close the modal
+$(document).on('click', 'button[aria-label="close"]', function() {
+  $('.modal').hide();
+  $('.modal-card').empty();
+});
 
-    pf.animal
-      .search({
-        location: userZip,
-        age: userAge,
-        type: userSpecies,
-        gender: userGender,
-      })
-      .then(response => {
-        const animalsArray = response.data.animals.length;
+// TODO - Add in enter key event listener so you can press enter to submit form
+$(document).on('click', '#Match', function(e) {
+  e.preventDefault();
 
-        for (let i = 0; i < animalsArray; i++) {
-          console.log(response);
+  options = {
+    location: $.trim($('#zip').val()),
+    age: $.trim($('#age').val()),
+    type: $.trim($('#species').val()),
+    gender: $.trim($('#gender').val()),
+  };
 
-          // if to check for picture, no picture, not included
-          if (
-            !response.data.animals[i].photos[0] &&
-            !response.data.animals[i].contact.address.address1
-          ) {
-            continue;
-          }
+  if (debug) console.log('Form Inputs', options);
 
-          const animalPhoto = response.data.animals[i].photos[0].small;
-
-          const animalAge = response.data.animals[i].age;
-          const animalName = response.data.animals[i].name;
-          const animalCity = response.data.animals[i].contact.address.city;
-          const animalState = response.data.animals[i].contact.address.state;
-          var animalAddress = response.data.animals[i].contact.address.address1;
-          const animalDiscription = response.data.animals[i].description;
-
-          const responsePhoto = $('<img>');
-          responsePhoto.attr('src', animalPhoto);
-          responsePhoto.addClass('animal-pic');
-          responsePhoto.attr('val', animalAddress);
-
-          const animalDiv = $("<div class='col-md-3'>");
-          animalDiv.append(responsePhoto);
-          animalDiv.addClass('for-pets');
-          animalDiv.append(animalName);
-
-          const modalPhoto = $('<img>');
-          modalPhoto.attr('src', animalPhoto);
-          modalPhoto.addClass('animal-pic');
-          modalPhoto.attr('val', animalAddress);
-
-          var modalDiv = $('<p>');
-          modalDiv.addClass('modal-pets');
-          modalDiv.append(modalPhoto);
-          modalDiv.append(animalAge);
-          modalDiv.append(animalName);
-          modalDiv.append(animalCity);
-          modalDiv.append(animalState);
-          modalDiv.append(animalAddress);
-          modalDiv.append(animalDiscription);
-
-          // var responseName = $("<p>");
-          // responseName.text(animalName);
-          // var responseAge = $("<p>");
-          // responseAge.text(animalAge);
-          // var responseState = $("<p>");
-          // responseState.text(animalState);
-          // var responseAddress = $("<p>");
-          // responseAddress.text(animalAddress);
-          // var responseDiscription = $("<p>");
-          // responseDiscription.text(animalDiscription);
-
-          $('#responseAnimal').prepend(animalDiv);
-          function mapMaker() {
-            $('#map').empty();
-            // console.log(animalAddress);
-            // var petAddress = $(this).val();
-            // Google Div placer!
-            $('#map').html(
-              `<iframe width='600' height='450' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?key=AIzaSyC9WPR0Lch_bWed56_TKHgqgRRIiAdBD2E&q=${animalAddress}' allowfullscreen> </iframe>`,
-            );
-          }
-        }
-
-        $(document).on('click', '.animal-pic', function(event) {
-          mapMaker();
-          $('.modal').show();
-          $('#modalAnimal').append(modalDiv);
-        });
-        $('.delete').on('click', function() {
-          $('.modal').hide();
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-        // Handle the error
-      });
-  });
+  // Hit API
+  getData(options);
 });
