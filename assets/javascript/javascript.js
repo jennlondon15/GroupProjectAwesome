@@ -210,6 +210,7 @@ $(document).on('click', '#Match', function(e) {
     age: $.trim($('#age').val()),
     type: $.trim($('#species').val()),
     gender: $.trim($('#gender').val()),
+    limit: 100,
   };
 
   if (debug) console.log('Form Inputs', options);
