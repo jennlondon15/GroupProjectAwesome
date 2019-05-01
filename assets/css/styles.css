@@ -73,7 +73,7 @@ main > .name {
   font-size: 20px;
 }
 
-.button: hover {
+.button.is-link: hover {
   background-color: #73bac7;
 }
 
