@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond|Poiret+One');
+
 /* Header */
 .hero {
   background-color: lightblue;
@@ -5,7 +7,7 @@
 }
 
 .hero > h1 {
-  font-family: 'Rammetto One', cursive;
+  font-family: 'Poiret One', cursive;
   font-size: 80px;
   color: white;
   text-align: left;
@@ -13,19 +15,27 @@
 
 .hero-body {
   padding: 1rem;
+  margin: 2rem;
   max-height: 400px;
 }
 
 .hero-body > main {
+  font-family: 'Poiret One', cursive;
+  color: black
   border: 2px solid white;
-  margin-top: 3rem;
   padding: 5rem 2rem;
   border-radius: 1rem;
 }
 
+main > .name {
+  font-size: 4rem;
+  font-weight: bold;
+  color: black;
+}
+
 .doggy {
   float: right;
-  height: 58vh;
+  height: 68vh;
   shape-outside: url('../images/dog.png');
 }
 
@@ -53,4 +63,36 @@
 .map > iframe {
   height: 100%;
   width: 100%;
+}
+
+.button.is-link {
+  background-color: #158997;
+  border-color: transparent;
+  color: #fff;
+  font-family: 'Poiret One', cursive;
+  font-size: 20px;
+}
+
+.button: hover {
+  background-color: #73bac7;
+}
+
+.tag:not(body).is-info {
+  background-color: #158997;
+  color: #fff;
+  font-family: 'Poiret One', cursive;
+  font-size: 20px;
+}
+
+.label {
+  font-family: 'Poiret One', cursive;
+}
+
+.select select {
+  font-family: 'Poiret One', cursive;
+}
+
+.input,
+.textarea {
+  font-family: 'Poiret One', cursive;
 }
