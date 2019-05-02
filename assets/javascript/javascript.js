@@ -70,6 +70,10 @@ function mapMaker(address) {
 function makeModal(selection) {
   const animal = animalArray.filter(item => item.id === selection.id)[0];
 
+  // if (animal.address === null || animal.city === null || animal.state === null) {
+  //     ${animal}
+  // }
+
   // TODO - Handle 'null' conditions before populating cards (If address is null just set it to "Denver, CO")
   const statRow = `
   <div id="stats" class="tile is-ancestor">
@@ -89,6 +93,8 @@ function makeModal(selection) {
       <article class="tile is-child box">
         <p>Address</p>
         <p>${animal.address}</p>
+        <p>Call me</p>
+        <p>${animal.phone}</p>  
       </article>
     </div>
   </div>
@@ -157,8 +163,10 @@ function onSuccess(response) {
       state: animals[i].contact.address.state,
       address: animals[i].contact.address.address1,
       description: animals[i].description,
+      phone: animals[i].contact.phone,
+      
     };
-
+    
     // Handle missing photo - assign blank dog and cat depending on user selection
     if (options.type === 'Dog') {
       animal.photo =
@@ -171,6 +179,8 @@ function onSuccess(response) {
           ? photos.map(item => item.large)[0].toString()
           : './assets/images/blank-cat.jpg';
     }
+
+    
 
     // Store animals into local array for future data filtering/selecting
     animalArray.push(animal);
