@@ -3,8 +3,8 @@ const debug = false;
 
 const animalArray = [];
 let options;
+let pages = {next: null, prev: null};
 
-// TODO - Handle Pagination routing - Max reply is often over 10k - We should be able to use the next and prev links to make some page buttons work https://www.w3schools.com/css/css3_pagination.asp
 const pf = new petfinder.Client({
   apiKey: 'HXhiJjRfDuYpnR3qEGLZ3A2J3wdv7Aj8oLtqTqbBm31lZjsmiU',
   secret: 'KboKKC3HHujidOq6ODiMScif9apSRrUGGXQtR14c',
@@ -69,8 +69,7 @@ function mapMaker(address) {
 // * Generates modal HTML from selected animal
 function makeModal(selection) {
   const animal = animalArray.filter(item => item.id === selection.id)[0];
-
-  // TODO - Handle 'null' conditions before populating cards (If address is null just set it to "Denver, CO")
+  
   const statRow = `
   <div id="stats" class="tile is-ancestor">
     <div class="tile is-parent">
@@ -136,33 +135,38 @@ function makeModal(selection) {
   `;
 
   $('.modal-card').append(modalCard);
+
+  
 }
 
 // * Extracts and Transforms data from API response
 function onSuccess(response) {
   if (debug) console.log('response:', response);
   const { animals } = response.data;
+  const { pagination } = response.data;
+  pages.next = pagination._links.next.href;
+  // pages.prev = pagination._links.prev.href;
+
 
   for (let i = 0; i < animals.length; i += 1) {
     // De-structure photos object from response
     const { photos } = response.data.animals[i];
 
-    // Assign Animal info from data set
+    // Assign Animal info from data set + handle null
     const animal = {
       photo: '',
       id: animals[i].id,
       age: animals[i].age,
       name: animals[i].name,
-      city: animals[i].contact.address.city,
-      state: animals[i].contact.address.state,
-      address: animals[i].contact.address.address1,
-      description: animals[i].description,
+      city: animals[i].contact.address.city || "Not available",
+      state: animals[i].contact.address.state || "Not available",
+      address: animals[i].contact.address.address1 || "Not available",
+      description: animals[i].description || "Not available",
     };
 
     // Handle missing photo - assign blank dog and cat depending on user selection
     if (options.type === 'Dog') {
-      animal.photo =
-        photos.length > 0
+      animal.photo = photos.length > 0
           ? photos.map(item => item.large)[0].toString()
           : './assets/images/blank-dog.png';
     } else if (options.type === 'Cat') {
@@ -177,7 +181,11 @@ function onSuccess(response) {
 
     // Make response card
     createCard(animal);
+   
   }
+  
+  let seeMoreButton = '<button class="button is-fullwidth is-link" aria-label="see-more">See more</button>'
+  $("#for-button").append(seeMoreButton);
 }
 
 // * Calls petfinder API then passes data to onSuccess function
@@ -204,17 +212,37 @@ $(document).on('click', 'button[aria-label="close"]', function() {
 // TODO - Add in enter key event listener so you can press enter to submit form
 $(document).on('click', '#Match', function(e) {
   e.preventDefault();
-
+    
   options = {
     location: $.trim($('#zip').val()),
     age: $.trim($('#age').val()),
     type: $.trim($('#species').val()),
     gender: $.trim($('#gender').val()),
-    limit: 100,
+    
   };
 
   if (debug) console.log('Form Inputs', options);
 
   // Hit API
   getData(options);
+
+  
+});
+
+// we getting a response as a object, so we need it as a
+function qsToObj(qs) {
+  const obj = {};
+  qs.split("?")[1].split("&").forEach(item => {
+    const v = item.split("=")
+    obj[v[0]] = v[1];
+  });
+
+  return obj;
+}
+
+
+$(document).on('click', 'button[aria-label="see-more"]', function() {
+  if (pages.next) {
+    getData(qsToObj(pages.next))
+  }
 });
