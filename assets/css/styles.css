@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Cormorant+Garamond|Poiret+One");
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond|Poiret+One');
 
 /* Header */
 .hero {
@@ -7,24 +7,10 @@
 }
 
 .hero > h1 {
-  font-family: "Poiret One", cursive;
+  font-family: 'Poiret One', cursive;
+  font-size: 80px;
   color: white;
   text-align: left;
-}
-
-h1.title {
-  color: white;
-}
-
-h2.subtitle {
-  color: white;
-}
-
-#app {
-  background-image: url("../images/steps1.png");
-  background-repeat: no-repeat;
-  background-position: 900px 10px;
-  background-size: 300px;
 }
 
 .hero-body {
@@ -34,25 +20,24 @@ h2.subtitle {
 }
 
 .hero-body > main {
-  font-family: "Poiret One", cursive;
-  color: white;
+  font-family: 'Poiret One', cursive;
+  color: black;
   border: 2px solid white;
   padding: 5rem 2rem;
   border-radius: 1rem;
 }
 
 main > .name {
-  font-size: 6rem;
+  font-size: 4rem;
   font-weight: bold;
-  color: white;
+  color: black;
 }
 
 .doggy {
   float: right;
-  height: 67vh;
-  shape-outside: url("../images/dog.png");
+  height: 68vh;
+  shape-outside: url('../images/dog.png');
 }
-
 
 /* Main Application View */
 
@@ -84,101 +69,30 @@ main > .name {
   background-color: #158997;
   border-color: transparent;
   color: #fff;
-  font-family: "Poiret One", cursive;
+  font-family: 'Poiret One', cursive;
   font-size: 20px;
 }
 
-.button.is-link:hover {
+.button.is-link: hover {
   background-color: #73bac7;
 }
 
 .tag:not(body).is-info {
   background-color: #158997;
   color: #fff;
-  font-family: "Poiret One", cursive;
+  font-family: 'Poiret One', cursive;
   font-size: 20px;
 }
 
 .label {
-  font-family: "Poiret One", cursive;
+  font-family: 'Poiret One', cursive;
 }
 
 .select select {
-  font-family: "Poiret One", cursive;
+  font-family: 'Poiret One', cursive;
 }
 
 .input,
 .textarea {
-  font-family: "Poiret One", cursive;
+  font-family: 'Poiret One', cursive;
 }
-
-/* mobile response */
-
-@media only screen and (max-width: 1295px) {
-  #app {
-    background-position: 500px 10px;
-    background-size: 300px;
-  }
-  
-}
-
-@media only screen and (max-width: 963px) {
-  #app {
-    background-position: 300px 10px;
-    background-size: 300px;
-  }
-  .doggy {
-    height: 65vh;
-  }
-  
-}
-
-@media only screen and (max-width: 915px) {
-  body {
-    line-height: 1;
-  }
-  #app {
-    background-position: 300px 20px;
-    background-size: 400px;
-  }
-  
-  .doggy {
-    height: 65vh;
-  }
-}
-
-@media only screen and (max-width: 822px) {
-  .doggy {
-    display: none;
-  }
-
-  .hero-body > main {
-    padding-top: 20px;
-    padding-bottom: 10px;
-    text-align: center;
-  }
-
-  main > .name {
-    padding-bottom: 30px;
-    font-size: 3rem;
-  }
-
-}
-
-@media only screen and (max-width: 748px) {
-  #app {
-    background-repeat: repeat;
-  }
-  
-}
-
-@media only screen and (max-width: 375px) {
-  .hero-body > main {
-    padding-top: 20px;
-    padding-bottom: 10px;
-    text-align: center;
-  }
-   
-}
-
-
