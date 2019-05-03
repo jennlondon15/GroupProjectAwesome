@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Cormorant+Garamond|Poiret+One");
+@import url('https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister');
 
 /* Header */
 .hero {
@@ -7,7 +7,7 @@
 }
 
 .hero > h1 {
-  font-family: "Poiret One", cursive;
+  font-family: 'Love Ya Like A Sister', cursive;
   color: white;
   text-align: left;
 }
@@ -34,7 +34,7 @@ h2.subtitle {
 }
 
 .hero-body > main {
-  font-family: "Poiret One", cursive;
+  font-family: 'Love Ya Like A Sister', cursive;
   color: white;
   border: 2px solid white;
   padding: 5rem 2rem;
@@ -84,7 +84,7 @@ main > .name {
   background-color: #158997;
   border-color: transparent;
   color: #fff;
-  font-family: "Poiret One", cursive;
+  font-family: 'Love Ya Like A Sister', cursive;
   font-size: 20px;
 }
 
@@ -95,21 +95,21 @@ main > .name {
 .tag:not(body).is-info {
   background-color: #158997;
   color: #fff;
-  font-family: "Poiret One", cursive;
+  font-family: 'Love Ya Like A Sister', cursive;
   font-size: 20px;
 }
 
 .label {
-  font-family: "Poiret One", cursive;
+  font-family: 'Love Ya Like A Sister', cursive;
 }
 
 .select select {
-  font-family: "Poiret One", cursive;
+  font-family: 'Love Ya Like A Sister', cursive;
 }
 
 .input,
 .textarea {
-  font-family: "Poiret One", cursive;
+  font-family: 'Love Ya Like A Sister', cursive;
 }
 
 /* mobile response */
