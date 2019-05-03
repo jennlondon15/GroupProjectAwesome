@@ -133,6 +133,7 @@ main > .name {
   
 }
 
+
 @media only screen and (max-width: 915px) {
   body {
     line-height: 1;
@@ -145,6 +146,24 @@ main > .name {
   .doggy {
     height: 65vh;
   }
+}
+
+@media only screen and (max-width: 852px) {
+
+  .hero-body > main {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  #app {
+    background-position: 300px 10px;
+    background-size: 300px;
+  }
+  .doggy {
+    height: 50vh;
+  }
+  
 }
 
 @media only screen and (max-width: 822px) {
@@ -180,5 +199,28 @@ main > .name {
   }
    
 }
+
+@media only screen and (max-width: 375px) {
+  .hero-body > main {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+   
+}
+
+@media only screen and (max-width: 320px) {
+  .hero-body > main {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+  main > .name {
+    padding-bottom: 30px;
+    font-size: 2rem;
+}
+
+}
+
 
 
