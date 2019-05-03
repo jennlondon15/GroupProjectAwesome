@@ -2,7 +2,9 @@
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Utilizing a PetFinder and Google Maps API, input simple requets and find your petmatch! Look through kittens and doggies, by clicking on "Get More Info" find the humane society they are located and get a friend for life!
+
+https://user-images.githubusercontent.com/46270669/57116980-d95cf700-6d15-11e9-98ae-aad99436b50f.png
 
 ### Prerequisites
 
