@@ -90,6 +90,8 @@ function makeModal(selection) {
       <article class="tile is-child box">
         <p>Address</p>
         <p>${animal.address}</p>
+        <p>Call me</p>
+        <p>${animal.phone}</p>  
       </article>
     </div>
   </div>
@@ -164,6 +166,7 @@ function onSuccess(response) {
       state: animals[i].contact.address.state || "Not available",
       address: animals[i].contact.address.address1 || "Not available",
       description: animals[i].description || "Not available",
+      phone: animals[i].contact.phone || "Not available",
     };
 
     // Handle missing photo - assign blank dog and cat depending on user selection
