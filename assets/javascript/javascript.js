@@ -222,8 +222,6 @@ $(document).on('click', 'button[aria-label="close"]', function() {
 // TODO - Add in enter key event listener so you can press enter to submit form
 $(document).on('click', '#Match', function(e) {
   e.preventDefault();
-
-  setTimeout(function(){$("#see-more-button").show();}, 3000);
   
     
   options = {
@@ -235,6 +233,12 @@ $(document).on('click', '#Match', function(e) {
   };
 
   if (debug) console.log('Form Inputs', options);
+    
+  if (options.age !== 0 && options.type !== 0 && options.gender !== 0 && options.location !== "") {
+    
+    setTimeout(function(){$("#see-more-button").show();}, 3000);
+  
+  }
 
   // Hit API
   getData(options);
