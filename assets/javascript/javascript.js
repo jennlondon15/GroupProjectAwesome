@@ -5,6 +5,8 @@ const animalArray = [];
 let options;
 let pages = {next: null, prev: null};
 
+$("#see-more-button").hide();
+
 const pf = new petfinder.Client({
   apiKey: 'HXhiJjRfDuYpnR3qEGLZ3A2J3wdv7Aj8oLtqTqbBm31lZjsmiU',
   secret: 'KboKKC3HHujidOq6ODiMScif9apSRrUGGXQtR14c',
@@ -184,9 +186,14 @@ function onSuccess(response) {
    
   }
   
-  let seeMoreButton = '<button class="button is-fullwidth is-link" aria-label="see-more">See more</button>'
-  $("#for-button").append(seeMoreButton);
+  
 }
+
+// get the button seeMore pets
+// function seeMoreButton () {
+//   let seeMoreButton = '<button class="button is-fullwidth is-link" aria-label="see-more">See more</button>'
+//   $("#for-button").append(seeMoreButton);
+// }
 
 // * Calls petfinder API then passes data to onSuccess function
 function getData(query) {
@@ -212,6 +219,9 @@ $(document).on('click', 'button[aria-label="close"]', function() {
 // TODO - Add in enter key event listener so you can press enter to submit form
 $(document).on('click', '#Match', function(e) {
   e.preventDefault();
+
+  setTimeout(function(){$("#see-more-button").show();}, 3000);
+  
     
   options = {
     location: $.trim($('#zip').val()),
